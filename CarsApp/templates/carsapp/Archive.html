@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %} Archived Cars {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white p-4 border-0">
+                    <h4 class="card-title mb-0 fw-bold text-center">
+                        <i class="bi bi-archive-fill me-2"></i>Archived Cars
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-4">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-3 text-white">ID</th>
+                                    <th class="py-3 text-white">Car Model</th>
+                                    <th class="py-3 text-white">Price</th>
+                                    <th class="py-3 text-white">Quantity</th>
+                                    <th class="py-3 text-white">Archived At</th>
+                                    <th class="py-3 text-white">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for car in cars %}
+                                    <tr>
+                                        <td>{{ car.id }}</td>
+                                        <td>{{ car.name }}</td>
+                                        <td>${{ car.price }}</td>
+                                        <td>
+                                            <span class="badge bg-{% if car.quantity > 0 %}success{% else %}danger{% endif %} rounded-pill">
+                                                {{ car.quantity }}
+                                            </span>
+                                        </td>
+                                        <td>{{ car.update_at }}</td>
+                                        <td>
+                                            <a href="{% url 'Retrieve' car.id %}" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-arrow-counterclockwise me-1"></i>Retrieve
+                                            </a>
+                                            <a href="{% url 'HardDelete' car.id %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to permanently delete this car? This action cannot be undone.');">
+                                                <i class="bi bi-x-circle me-1"></i>Permanent Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4 text-muted">
+                                            <i class="bi bi-inbox-fill fs-4 d-block mb-2"></i>
+                                            No archived cars found
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'Read' %}" class="btn btn-outline-light">
+                            <i class="bi bi-arrow-left me-2"></i>Back to Inventory
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

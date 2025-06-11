@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %} Inventory Management {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white p-4 border-0">
+                    <h4 class="card-title mb-0 fw-bold text-center">
+                        <i class="bi bi-car-front-fill me-2"></i>Car Inventory
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <form method="get" class="d-flex" style="max-width: 400px;">
+                            <input type="text" name="search" class="form-control me-2" placeholder="Search car model..." value="{{ search_query }}">
+                            <button type="submit" class="btn btn-outline-primary">Search</button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-4">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-3">
+                                        <a href="{% url 'Read' %}?order_by=id" class="text-decoration-none text-white">
+                                            ID <i class="bi bi-arrow-down-up"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-3">
+                                        <a href="{% url 'Read' %}?order_by=name" class="text-decoration-none text-white">
+                                            Car Model <i class="bi bi-arrow-down-up"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-3">
+                                        <a href="{% url 'Read' %}?order_by=price" class="text-decoration-none text-white">
+                                            Price <i class="bi bi-arrow-down-up"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-3">
+                                        <a href="{% url 'Read' %}?order_by=quantity" class="text-decoration-none text-white">
+                                            Quantity <i class="bi bi-arrow-down-up"></i>
+                                        </a>
+                                    </th>
+                                    <th class="py-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for car in cars %}
+                                    <tr>
+                                        <td>{{ car.id }}</td>
+                                        <td>{{ car.name }}</td>
+                                        <td>${{ car.price }}</td>
+                                        <td>
+                                            <span class="badge bg-{% if car.quantity > 0 %}success{% else %}danger{% endif %} rounded-pill">
+                                                {{ car.quantity }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{% url 'Update' car.id %}" class="btn btn-outline-primary btn-sm">
+                                                    <i class="bi bi-pencil-square me-1"></i>Edit
+                                                </a>
+                                                <a href="{% url 'Delete' car.id %}" class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-trash me-1"></i>Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="5" class="text-center py-4 text-muted">
+                                            <i class="bi bi-inbox-fill fs-4 d-block mb-2"></i>
+                                            No cars found in inventory
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a href="{% url 'Create' %}" class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-2"></i>Add New Car
+                        </a>
+                        <a href="{% url 'Archive' %}" class="btn btn-outline-light">
+                            <i class="bi bi-archive me-2"></i>View Archived Cars
+                        </a>
+                        <a href="{% url 'ImportCSV' %}" class="btn btn-outline-success">
+                            <i class="bi bi-upload me-2"></i>Import CSV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %} Update Car {% endblock %}
+
+{% block content %}
+<div class="container-fluid min-vh-100">
+    <div class="row justify-content-center py-5">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white p-4 border-0">
+                    <h4 class="card-title text-center mb-0 fw-bold">
+                        <i class="bi bi-pencil-square me-2"></i>Update Car
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    {% if message %}
+                        <div class="alert alert-success border-0 rounded-3 d-flex align-items-center" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <div>{{ message }}</div>
+                        </div>
+                    {% endif %}
+
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="Car_Name" class="form-label text-muted fw-medium">Car Model</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0">
+                                    <i class="bi bi-car-front"></i>
+                                </span>
+                                <input type="text" id="Car_Name" name="Car_Name" 
+                                    class="form-control border-start-0 ps-0" 
+                                    value="{{ car.name }}"
+                                    placeholder="Enter car model" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="price" class="form-label text-muted fw-medium">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <input type="number" id="price" name="price" 
+                                    class="form-control border-start-0 ps-0" 
+                                    value="{{ car.price }}"
+                                    placeholder="Enter price" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="quantity" class="form-label text-muted fw-medium">Quantity</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0">
+                                    <i class="bi bi-boxes"></i>
+                                </span>
+                                <input type="number" id="quantity" name="quantity" 
+                                    class="form-control border-start-0 ps-0" 
+                                    value="{{ car.quantity }}"
+                                    placeholder="Enter quantity" required>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary py-3 fw-medium">
+                                <i class="bi bi-check-circle me-2"></i>Save Changes
+                            </button>
+                            <a href="{% url 'Read' %}" class="btn btn-outline-light py-3 fw-medium">
+                                <i class="bi bi-arrow-left me-2"></i>Back to Inventory
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
