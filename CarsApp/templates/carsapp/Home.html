@@ -1,16 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home - Car Management System{% endblock %}
 
 {% block content %}
 <style>
-    body {
+    .parallax-container {
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        perspective: 2px;
+    }
+
+    .parallax-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform-style: preserve-3d;
+        transform: translateZ(-1px) scale(1.5);
+        z-index: -1;
         background-image: url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1500&q=80');
         background-size: cover;
         background-position: center;
         min-height: 100vh;
-        color: #fff;
     }
+
+    .content {
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(0);
+        z-index: 1;
+        min-height: 100vh;
+    }
+
     .overlay {
         background: rgba(0,0,0,0.6);
         min-height: 100vh;
@@ -19,9 +43,22 @@
         justify-content: center;
         align-items: center;
         padding: 0 20px;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .overlay.visible {
+        opacity: 1;
     }
     .btn-inventory {
         margin-top: 2rem;
+        transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+    }
+    .btn-inventory:active {
+        transform: scale(0.96);
+    }
+    .btn-inventory:hover, .btn-inventory:focus {
+        transform: scale(1.08);
+        box-shadow: 0 8px 24px 0 rgba(0,123,255,0.25);
     }
     .description {
         max-width: 600px;
@@ -29,14 +66,101 @@
         font-size: 1.2rem;
         text-align: center;
     }
+    @media (max-width: 600px) {
+        .description { font-size: 1rem; }
+        .btn-inventory { width: 100%; }
+    }
+    .typing {
+        border-right: .1em solid #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 2s steps(30, end) forwards, blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #fff; }
+    }
 </style>
-<div class="overlay">
-    <h1 class="display-4 fw-bold text-center">WELCOME, CAR ENTHUSIAST!</h1>
-    <div class="description">
-        <p>
-            This Car Management System allows you to easily manage a diverse inventory of cars. Add, view, update, and archive car records with a user-friendly interface. Built with Django, Bootstrap, and MySQL for robust performance and a modern look.
-        </p>
+
+<div class="parallax-container">
+    <div class="parallax-bg"></div>
+    <div class="content">
+        <div class="overlay" id="homeOverlay">
+            <h1 class="display-4 fw-bold text-center"><span id="typeHeader" class="typing"></span></h1>
+            <div class="description">
+                <p>
+                    This Car Management System allows you to easily manage a diverse inventory of cars. Add, view, update, and archive car records with a user-friendly interface. Built with Django, Bootstrap, and MySQL for robust performance and a modern look.
+                </p>
+            </div>
+            <a href="/read/" class="btn btn-primary btn-lg btn-inventory" id="showInventoryBtn" style="background-color: #007bff; border-color: #007bff;">Show Inventory</a>
+        </div>
     </div>
-    <a href="/read/" class="btn btn-primary btn-lg btn-inventory">Show Inventory</a>
 </div>
+
+<script>
+// Fade-in effect for overlay
+window.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('homeOverlay');
+    overlay.classList.add('visible');
+
+    // Typing effect for header
+    const text = 'WELCOME, CAR ENTHUSIAST!';
+    const typeHeader = document.getElementById('typeHeader');
+    let i = 0;
+
+    function clearText() {
+        return new Promise(resolve => {
+            let j = typeHeader.textContent.length;
+            function erase() {
+                if (j >= 0) {
+                    typeHeader.textContent = text.substring(0, j);
+                    j--;
+                    setTimeout(erase, 30);
+                } else {
+                    resolve();
+                }
+            }
+            setTimeout(erase, 3000); // Wait 3 seconds before starting to erase
+        });
+    }
+
+    async function typeLoop() {
+        if (i <= text.length) {
+            typeHeader.textContent = text.substring(0, i);
+            i++;
+            setTimeout(typeLoop, 60);
+        } else {
+            await clearText();
+            i = 0;
+            typeLoop();
+        }
+    }
+    
+    typeLoop();
+
+    // Page transition effect
+    const showInventoryBtn = document.getElementById('showInventoryBtn');
+    showInventoryBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent immediate navigation
+        overlay.style.transition = 'opacity 0.5s ease';
+        overlay.style.opacity = '0';
+        
+        setTimeout(() => {
+            window.location.href = this.href;
+        }, 500); // Match this with the transition duration
+    });
+
+    // Smooth parallax effect on scroll
+    const parallaxBg = document.querySelector('.parallax-bg');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        parallaxBg.style.transform = `translateZ(-1px) scale(1.5) translateY(${scrolled * 0.5}px)`;
+    });
+});
+</script>
 {% endblock %}
