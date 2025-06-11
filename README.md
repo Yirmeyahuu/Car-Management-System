@@ -18,7 +18,7 @@ A Django web application for managing a car inventory with full CRUD (Create, Re
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Yirmeyahuu/Car-Management-System.git
    cd django-crud
    ```
 
