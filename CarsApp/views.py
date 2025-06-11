@@ -5,11 +5,10 @@ from .models import Cars
 from django.db.models import Count
 from django.db.models.functions import TruncDate
 import csv
-from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
-    return HttpResponse("Welcome to the CRUD Application!")
+    return render(request, 'carsapp/Home.html')
 
 def Create(request):
     if request.method == 'POST':

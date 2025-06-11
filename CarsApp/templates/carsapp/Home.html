@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Car Management System{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1500&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        color: #fff;
+    }
+    .overlay {
+        background: rgba(0,0,0,0.6);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+    }
+    .btn-inventory {
+        margin-top: 2rem;
+    }
+    .description {
+        max-width: 600px;
+        margin: 20px auto 0 auto;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+</style>
+<div class="overlay">
+    <h1 class="display-4 fw-bold text-center">WELCOME, CAR ENTHUSIAST!</h1>
+    <div class="description">
+        <p>
+            This Car Management System allows you to easily manage a diverse inventory of cars. Add, view, update, and archive car records with a user-friendly interface. Built with Django, Bootstrap, and MySQL for robust performance and a modern look.
+        </p>
+    </div>
+    <a href="/read/" class="btn btn-primary btn-lg btn-inventory">Show Inventory</a>
+</div>
+{% endblock %}

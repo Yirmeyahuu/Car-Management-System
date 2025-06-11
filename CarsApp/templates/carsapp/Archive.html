@@ -70,4 +70,29 @@
         </div>
     </div>
 </div>
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeLabel = document.getElementById('theme-label');
+    const htmlTag = document.documentElement;
+    function setTheme(theme) {
+        htmlTag.setAttribute('data-bs-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+            themeIcon.className = 'bi bi-moon-fill';
+            themeLabel.textContent = 'Dark Mode';
+        } else {
+            themeIcon.className = 'bi bi-sun-fill';
+            themeLabel.textContent = 'Light Mode';
+        }
+    }
+    // On load, set theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = htmlTag.getAttribute('data-bs-theme');
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+</script>
 {% endblock %}

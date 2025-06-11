@@ -2,7 +2,7 @@
 {% block title %} Add New Car {% endblock %}
 
 {% block content %}
-<div class="container-fluid min-vh-100">
+<div class="container-fluid min-vh-100 px-2 px-md-0">
     <div class="row justify-content-center py-5">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
@@ -23,8 +23,8 @@
                         {% csrf_token %}
                         <div class="mb-4">
                             <label for="Car_Name" class="form-label text-muted fw-medium">Car Model</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0">
+                            <div class="input-group flex-column flex-sm-row">
+                                <span class="input-group-text border-end-0 mb-2 mb-sm-0">
                                     <i class="bi bi-car-front"></i>
                                 </span>
                                 <input type="text" id="Car_Name" name="Car_Name" 
@@ -34,8 +34,8 @@
                         </div>
                         <div class="mb-4">
                             <label for="price" class="form-label text-muted fw-medium">Price</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0">
+                            <div class="input-group flex-column flex-sm-row">
+                                <span class="input-group-text border-end-0 mb-2 mb-sm-0">
                                     <i class="bi bi-tag"></i>
                                 </span>
                                 <input type="number" id="price" name="price" 
@@ -45,8 +45,8 @@
                         </div>
                         <div class="mb-4">
                             <label for="quantity" class="form-label text-muted fw-medium">Quantity</label>
-                            <div class="input-group">
-                                <span class="input-group-text border-end-0">
+                            <div class="input-group flex-column flex-sm-row">
+                                <span class="input-group-text border-end-0 mb-2 mb-sm-0">
                                     <i class="bi bi-boxes"></i>
                                 </span>
                                 <input type="number" id="quantity" name="quantity" 
@@ -55,10 +55,10 @@
                             </div>
                         </div>
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn btn-primary py-3 fw-medium">
+                            <button type="submit" class="btn btn-primary py-3 fw-medium w-100">
                                 <i class="bi bi-plus-circle me-2"></i>Add Car
                             </button>
-                            <a href="{% url 'Read' %}" class="btn btn-outline-light py-3 fw-medium">
+                            <a href="{% url 'Read' %}" class="btn btn-outline-light py-3 fw-medium w-100">
                                 <i class="bi bi-arrow-left me-2"></i>Back to Inventory
                             </a>
                         </div>
