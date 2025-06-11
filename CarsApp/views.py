@@ -186,3 +186,23 @@ def ImportCSV(request):
         except Exception as e:
             messages.error(request, f'Error processing file: {str(e)}')
     return render(request, 'carsapp/ImportCSV.html')
+
+def ExportCSV(request):
+    """Export all non-archived cars as a CSV file."""
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="car_inventory.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['id', 'name', 'price', 'quantity'])
+    for car in Cars.objects.filter(is_delete=False):
+        writer.writerow([car.id, car.name, car.price, car.quantity])
+    return response
+
+def ExportArchivedCSV(request):
+    """Export all archived cars as a CSV file."""
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="archived_cars.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['id', 'name', 'price', 'quantity'])
+    for car in Cars.objects.filter(is_delete=True):
+        writer.writerow([car.id, car.name, car.price, car.quantity])
+    return response

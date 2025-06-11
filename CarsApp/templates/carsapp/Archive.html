@@ -57,7 +57,10 @@
                         </table>
                     </div>
                     
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a href="{% url 'ExportArchivedCSV' %}" class="btn btn-outline-warning">
+                            <i class="bi bi-download me-2"></i>Export Archived CSV
+                        </a>
                         <a href="{% url 'Read' %}" class="btn btn-outline-light">
                             <i class="bi bi-arrow-left me-2"></i>Back to Inventory
                         </a>

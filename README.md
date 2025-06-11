@@ -13,6 +13,8 @@ This application provides a complete workflow for managing a car inventory. Here
 - 🗑️ **Delete/Archive Car**: Remove cars from the active inventory (archived cars can be restored).
 - ♻️ **Restore Car**: Bring back previously archived cars to the active inventory.
 - 📥 **Import CSV**: Bulk add or update cars by uploading a CSV file. Existing cars (matched by name) are updated; new ones are added.
+- 📤 **Export CSV**: Download the current car inventory as a CSV file.
+- 🗃️ **Export Archived CSV**: Download all archived cars as a CSV file.
 - 🔍 **Search**: Quickly find cars by typing part or all of the car name in the search bar.
 
 ### 📝 Typical User Steps
@@ -21,7 +23,9 @@ This application provides a complete workflow for managing a car inventory. Here
 3. ✏️/🗑️ **Edit or Delete**: Use the action buttons next to each car to update or archive them.
 4. ♻️ **Restore Archived Cars**: Visit the archive page to restore any deleted cars.
 5. 📥 **Import Data**: Use the “Import CSV” feature to upload a list of cars for bulk management.
-6. 🔍 **Search**: Use the search bar to filter cars by name instantly.
+6. 📤 **Export Data**: Use the “Export CSV” button to download the current inventory as a CSV file.
+7. 🗃️ **Export Archived Data**: Use the “Export Archived CSV” button on the archive page to download archived cars as a CSV file.
+8. 🔍 **Search**: Use the search bar to filter cars by name instantly.
 
 All actions are performed through a responsive Bootstrap UI, making the system easy to use on both desktop and mobile devices.
 
@@ -29,6 +33,8 @@ All actions are performed through a responsive Bootstrap UI, making the system e
 - ➕ Add, view, update, and delete car records
 - ♻️ Archive and restore deleted cars
 - 📥 Import cars from a CSV file (add new or update existing by name)
+- 📤 Export cars to a CSV file
+- 🗃️ Export archived cars to a CSV file
 - 🔍 Search car models by name
 - 📱 Responsive Bootstrap UI
 
@@ -87,6 +93,12 @@ Ford Mustang,35000.00,5
 Tesla Model 3,40000.00,8
 Nissan Altima,21000.00,12
 ```
+
+## 📤 Export CSV
+- Click the "Export CSV" button on the inventory page to download all current cars as a CSV file.
+
+## 🗃️ Export Archived CSV
+- Go to the archive page and click the "Export Archived CSV" button to download all archived cars as a CSV file.
 
 ## 🔍 Search
 - Use the search bar at the top of the inventory page to filter car models by name.

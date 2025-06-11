@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import ImportCSV
+from .views import ImportCSV, ExportCSV, ExportArchivedCSV
 
 urlpatterns = [
     path('', views.home, name='Home'),
@@ -13,4 +13,6 @@ urlpatterns = [
     path('dashboard/', views.Dashboard, name='Dashboard'),
     path('hard_delete/<int:uid>/', views.HardDelete, name='HardDelete'),
     path('import-csv/', ImportCSV, name='ImportCSV'),
+    path('export-csv/', ExportCSV, name='ExportCSV'),
+    path('export-archived-csv/', ExportArchivedCSV, name='ExportArchivedCSV'),
 ]
